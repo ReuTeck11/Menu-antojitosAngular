@@ -1,0 +1,34 @@
+<div class="container-fluid bg-grey">
+    <div class="row">
+
+        <div class="col-sm-5 formulario">
+            <h2 class="text-center">Registro Platillos</h2>
+            <hr>
+
+            <form #formPlatillo="ngForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="strNombre" required name="strNombre" [(ngModel)]="platillo.strNombre" #strNombre="ngModel" placeholder="Nombre del platillo">
+                </div>
+                <div class="form-group">
+                    <textarea id="strDescipcion" name="strDescripcion" class="md-textarea form-control" [(ngModel)]="platillo.strDescripcion" #strDescripcion="ngModel" rows="3" placeholder="Descripción"></textarea>
+                </div>
+                <div class="form-group">
+                    <textarea id="strIngredientes" name="strIngredientes" class="md-textarea form-control" [(ngModel)]="platillo.strIngredientes" #strIngredientes="ngModel" rows="3" placeholder="Ingredientes"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" id="nmbPiezas" required name="nmbPiezas" [(ngModel)]="platillo.nmbPiezas" #nmbPiezas="ngModel" placeholder="Numero de piezas">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" id="nmbPrecio" required name="nmbPrecio" [(ngModel)]="platillo.nmbPrecio" #nmbPrecio="ngModel" placeholder="Precio">
+                </div>
+                <button type="reset" class="btn btn-danger col-5 cancelar">Cancelar</button> &nbsp;
+                <button type="submit" class="btn btn-success col-5 registrar">Registrar</button>
+            </form>
+        </div>
+        <br>
+
+
+
+
+    </div>
+</div>
