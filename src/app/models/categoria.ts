@@ -1,6 +1,6 @@
 export class CategoriaModel {
-    id: String;
-    strNombre: String;
-    strDescripcion: String;
+    _id: string;
+    strNombre: string;
+    strDescripcion: string;
     // blnStatus: Boolean;
 }
