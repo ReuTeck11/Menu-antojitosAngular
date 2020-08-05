@@ -10,12 +10,14 @@ import { NgForm } from '@angular/forms';
 })
 export class CategoriaComponent implements OnInit {
 
-  public categoria: CategoriaModel;
+   categorias: CategoriaModel[] = [];
 
-  listaCategoria: CategoriaModel[];
+   categoria: CategoriaModel = new CategoriaModel();
+
+   actualizar: boolean = false;
+
 
   constructor( private categoriaService: CategoriaService) {
-    this.categoria = new CategoriaModel();
   }
 
   ngOnInit(): void {
@@ -23,25 +25,35 @@ export class CategoriaComponent implements OnInit {
   }
 
   obtenerCategorias(){
-    // this.categoriaService.getCategorias().then((data) => {
-    //   console.log(data);
-    // }).catch((err) => {
-    //   console.log(err);
-    // });
     this.categoriaService.getCategorias().then((data: any) => {
-      console.log(data);
+      console.log(data.categorias);
+      this.categorias = data.categorias;
     }).catch((err) => {
       console.log(err);
     });
   }
 
-  agregarCategorias(form: NgForm){
-    // this.categoriaService.postCategoria(form.value).subscribe(arg => {
-    //   this.obtenerCategorias();
-    //   console.log(arg);
-    //   form.reset();
-    // });
+  changeView(valor: boolean, idCategoria: string) {
+    this.actualizar = valor;
+    // this.categoriaService.getCategori
+    console.log(idCategoria);
   }
+
+  cancelUpdate(valor: boolean) {
+    this.actualizar = valor;
+  }
+
+  agregarCategorias(){
+    this.categoriaService.postCategoria(this.categoria).then(data => {
+      console.log(data);
+      this.obtenerCategorias();
+    }).catch((err) => {
+      console.log(err);
+    });
+    
+
+  }
+
 
 
 }

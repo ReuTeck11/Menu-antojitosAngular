@@ -1,7 +1,7 @@
 <div class="container-fluid bg-grey">
     <div class="row">
 
-        <div class="col-sm-5 formulario">
+        <div class="col-sm-5 formulario" *ngIf="actualizar === false">
             <h2 class="text-center">Registro Categoria</h2>
             <hr>
 
@@ -13,16 +13,32 @@
                     <textarea id="strDescipcion" name="strDescripcion" class="md-textarea form-control" [(ngModel)]="categoria.strDescripcion" #strDescripcion="ngModel" rows="10" placeholder="Descripción"></textarea>
                 </div>
                 <button type="reset" class="btn btn-danger col-5 cancelar">Cancelar</button> &nbsp;
-                <button type="submit" class="btn btn-success col-5 registrar">Registrar</button>
+                <button type="submit" class="btn btn-success col-5 registrar" (click)="agregarCategorias()">Registrar</button>
+            </form>
+        </div>
+
+        <div class="col-sm-5 formulario" *ngIf="actualizar === true">
+            <h2 class="text-center">Actualizar Categoria</h2>
+            <hr>
+
+            <form #formCategoria="ngForm">
+                <div class="form-group">
+                    <input ng-repeat="unique:attribute" type="text" class="form-control" id="strNombre" required name="strNombre" [(ngModel)]="categoria.strNombre" #strNombre="ngModel" placeholder="Nombre de catergoria">
+                </div>
+                <div class="form-group">
+                    <textarea id="strDescipcion" name="strDescripcion" class="md-textarea form-control" [(ngModel)]="categoria.strDescripcion" #strDescripcion="ngModel" rows="10" placeholder="Descripción"></textarea>
+                </div>
+                <button type="reset" class="btn btn-danger col-5 cancelar" (click)="cancelUpdate(false)">Cancelar</button> &nbsp;
+                <button type="submit" class="btn btn-success col-5 registrar" (click)="cancelUpdate(false)">Actualizar</button>
             </form>
         </div>
         <br>
         <div class="col-sm-7 tabla ">
             <div class="input-group mb-3 ">
                 <!-- <input type="text " class="form-control " placeholder="Buscar... " aria-describedby="basic-addon2 " [(ngModel)]="search">&nbsp;&nbsp; -->
-                <button class="btn btn-outline-danger " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <!-- <button class="btn btn-outline-danger " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-ellipsis-h"></i>
-                </button>
+                </button> -->
                 <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" (click)="exportExcel()"><i class="far fa-file-excel"></i>&nbsp;Excel</a>
                     <a class="dropdown-item" type="button" value="Descargar PDF" (click)="exportPdf()"><i class="far fa-file-pdf"></i>&nbsp;PDF</a>
@@ -40,17 +56,17 @@
                         </tr>
                     </thead>
                     <tbody id="body ">
-                        <tr *ngFor="let item of categoria">
+                        <tr *ngFor="let item of categorias">
                             <td>{{item.strNombre}}</td>
                             <td>{{item.strDescripcion}}</td>
-                            <td>
-                                <button class="btn btn-outline-success " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <i class="fas fa-ellipsis-h"></i>
-                            </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item"><i class="fas fa-edit"></i>&nbsp;Editar</a>
-                                    <a class="dropdown-item"><i class="far fa-check-square"></i>&nbsp;Activar/desactivar</a>
-
+                            <td class=" text-center ">
+                                <button type="button" class="btn btn-info btn-sm" id="dropdownReports" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h "></i></button>
+                                <div class="dropdown-menu dropdown-menu-right shadow-lg " aria-labelledby="dropdownReports">
+                                    <div class="dropdown-header text-info">
+                                        <span class="text-xs text-uppercase ">opciones</span>
+                                    </div>
+                                    <a (click)="changeView(true, item._id)" type="button" class="dropdown-item drop-options-text excel "><i class="fa fa-edit mr-2 "></i>Actualizar</a>
+                                    <a [routerLink]="['/platillos', item._id]" type="button" class="dropdown-item drop-options-text blue"><i class="fa fa-book mr-2 "></i>Platillos</a>
                                 </div>
                             </td>
                         </tr>

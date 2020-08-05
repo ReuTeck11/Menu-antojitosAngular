@@ -21,7 +21,6 @@ export class CategoriaService {
   }
 
   putCategoria(categoria: CategoriaModel){
-    return this.http.put(`${this.url}/categoria/${categoria.id}`, categoria).toPromise();
+    return this.http.put(`${this.url}/categoria/${categoria._id}`, categoria).toPromise();
   }
-
 }
